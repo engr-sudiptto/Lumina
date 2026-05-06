@@ -1,6 +1,6 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
-import luminaHeroImage from '../assets/lumina-hero.png';
+import luminaHeroImage from '../assets/lumina-hero.jpg';
 import community from '../assets/comunity.png';
 import support from '../assets/support.png';
 import content from '../assets/content.png';
