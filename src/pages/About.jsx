@@ -1,8 +1,9 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
-import selfie from '../assets/selfie.jpeg';
-import selfie2 from '../assets/selfie2.jpeg';
+import selfie from '../assets/groupSit.jpg';
+import selfie2 from '../assets/groupHnad.jpg';
 import Footer from '../components/Footer';
+import { Link } from 'react-router-dom';
 
 const About = () => {
   const stats = [
@@ -41,6 +42,35 @@ const About = () => {
       circle: 'bg-teal-600',
     },
   ];
+
+  const ecosystemArray = [
+    {
+      title: 'React',
+      version: 'v19',
+      useCase: 'UI Library',
+    },
+    {
+      title: 'Tailwind CSS',
+      version: 'v4',
+      useCase: 'Styling',
+    },
+    {
+      title: 'JavaScript',
+      version: 'ES2025+', 
+      useCase: 'Dynamic Web Functionality',
+    },
+    {
+      title: 'Vite',
+      version: 'v8',
+      useCase: 'Build Tool',
+    },
+    {
+      title: 'Framer Motion',
+      version: 'Latest',
+      useCase: 'Animation',
+    },
+  ];
+
 
   return (
     <div>
@@ -134,10 +164,79 @@ const About = () => {
           </div>
         </div>
       </div>
-      
-      {/* ========== footer section ============  */}
-      <Footer/>
 
+      {/* ============== Enginnering Excellence =================  */}
+      <div className="mt-35">
+        <h3 className="text-center text-2xl font-semibold text-gray-700">
+          Engineering Excellence
+        </h3>
+        <p className="text-center w-75 m-auto text-sm text-gray-500 mt-2">
+          The modern tools powering the Lumina ecosystem
+        </p>
+        <div className="grid gap-3 p-5 grid-cols-2 mt-2 lg:grid-cols-3 xl:grid-cols-4 max-w-350 m-auto 2xl:grid-cols-5">
+          {ecosystemArray.map((item, index) => (
+            <div key={index} className="border border-gray-100 shadow rounded-xl pl-3 pr-3 content-center w-full h-33 hover:border-blue-400 hover:-translate-y-3 duration-300 hover:shadow-2xl hover:bg-blue-50 group">
+              <h3 className="text-lg font-semibold group-hover:text-blue-400">
+                {item.title}
+              </h3>
+              <span className="text-xs text-gray-400">{item.version}</span>
+              <p className="text-sm text-gray-600">{item.useCase}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* =================== What's Next for Lumina ==========  */}
+      <div className="my-10 w-full p-5 bg-gray-50 py-7">
+        <h3 className="text-3xl font-semibold text-center">
+          What's Next for Lumina?
+        </h3>
+        <div className="w-full max-w-200 m-auto flex flex-col items-baseline p-5 bg-white mt-5 rounded-xl shadow-[0_10px_10px_#00000030] sm:flex-row gap-5 sm:gap-10">
+          <h4 className="font-bold text-lg text-blue-600">Q3 2326</h4>
+          <div>
+            <h4 className="text-lg font-bold text-gray-600 ">
+              End-to-End Encrypted Messaging
+            </h4>
+            <p className="text-sm text-gray-400">
+              Launching our secure chat module for private conversation
+            </p>
+          </div>
+        </div>
+
+        <div className="w-full max-w-200 m-auto flex flex-col items-baseline p-5 bg-white mt-5 rounded-xl shadow sm:flex-row sm:gap-10">
+          <h4 className="font-bold text-lg text-gray-400">Q3 2326</h4>
+          <div>
+            <h4 className="text-lg font-bold text-gray-500 ">
+              End-to-End Encrypted Messaging
+            </h4>
+            <p className="text-sm text-gray-400">
+              Launching our secure chat module for private conversation
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* ==================== cta section ================== */}
+      <div className=" bg-linear-to-br from-blue-600 to-indigo-700 w-[90%] m-auto mb-10 p-5 rounded-xl sm:p-10 max-w-200">
+        <h3 className="text-4xl text-white font-semibold">
+          Ready to join the light?
+        </h3>
+        <p className="text-gray-200 text-sm mt-3">
+          Create an account today and experience the future of social
+          networking. No ads, no tracking, just you and your community.
+        </p>
+        <div className='flex gap-5'>
+          <Link to='/register' className="block w-50 h-12 bg-white text-blue-600 font-semibold text-center content-center rounded-full mt-5 hover:bg-white/90 transition-all transform hover:scale-105 active:scale-95">
+            Create Free account
+          </Link>
+          <Link className="block w-50 h-12 bg-blue-800/40 text-white border border-white/30 rounded-full mt-5 text-center content-center font-semibold hover:bg-blue-800/60 transition-all hover:shadow-[0_10px_10px_#00000030] hover:-translate-y-2 duration-300">
+            Contact Support
+          </Link>
+        </div>
+      </div>
+
+      {/* ========== footer section ============  */}
+      <Footer />
     </div>
   );
 };
