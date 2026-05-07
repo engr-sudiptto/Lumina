@@ -9,6 +9,8 @@ import hiking from '../assets/hiking.jpg'
 import groupHiking from '../assets/group-hiking.jpg'
 import iceHome from '../assets/ice-home.jpg'
 import group from '../assets/group.jpg'
+import selfie from '../assets/selfie.jpeg'
+import selfie2 from '../assets/selfie2.jpeg'
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 
@@ -70,6 +72,48 @@ const Home = () => {
           Join Us
         </Link>
       </div>
+
+      {/* ============ found section ============  */}
+      <div className="flex flex-col-reverse m-auto mb-10 sm:grid sm:grid-cols-2 w-full max-w-190 ">
+        <div className="p-5 mt-18">
+          <h2 className="text-4xl text-gray-700">
+            Founded in 2024 to Fix social Media.
+          </h2>
+          <p className="text-sm mt-3 text-gray-500 ">
+            Lumina was born out of frustration. As developers, we saw how social
+            media was becoming toxic, cluttered, and data-hungry. We decided to
+            build a solution.
+          </p>
+          <p className="text-sm mt-3 text-gray-500 ">
+            Our mission is to create a decentralized feel with a centralized
+            ease of use. We are constantly improving our algorithms to ensure
+            they serve the user, not the advertisers.
+          </p>
+        </div>
+        <div className="grid grid-cols-2 p-5 w-full max-w-125 gap-2 h-75">
+          <div className="flex flex-col gap-2 mt-10">
+            <img className="w-full h-55 object-cover rounded-xl" src={selfie} />
+            <span className="w-full h-20 text-center content-center bg-blue-500 rounded-xl text-white font-semibold text-lg">
+              Engage.
+            </span>
+          </div>
+          <div className="flex flex-col gap-2">
+            <span className="w-full h-20 text-center content-center bg-indigo-500 rounded-xl text-white font-semibold text-lg">
+              Collaborate.
+            </span>
+            <img
+              className="w-full h-55 object-cover rounded-xl"
+              src={selfie2}
+            />
+          </div>
+        </div>
+      </div>
+      <Link
+        to="/login"
+        className="w-50 h-12 border-2 border-blue-300 text-blue-300 font-semibold text-center content-center rounded-xl m-auto block mb-15 mt-10 sm:mb-20 xl:mb-25 2xl:mb-30 sm:mt-20 hover:bg-blue-300 hover:text-gray-700 hover:shadow-[0_10px_10px_#00000030] hover:-translate-y-2 duration-150"
+      >
+        Login Now
+      </Link>
 
       <div className="flex flex-col gap-5 items-center justify-center sm:flex-row sm:gap-3 sm:p-5 xl:w-3/4 xl:m-auto xl:gap-5 2xl:w-2/3">
         <div className="w-4/5 rounded-xl h-60 py-5 bg-gray-100 flex flex-col items-center justify-center">
@@ -148,8 +192,6 @@ const Home = () => {
 
       {/* footer section  */}
       <Footer />
-
-      
     </div>
   );
 };
