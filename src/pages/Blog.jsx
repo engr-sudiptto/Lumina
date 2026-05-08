@@ -1,14 +1,54 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import blogHero from '../assets/blogHero.jpg';
 import blogBody from '../assets/blogBody.jpg';
-import blogPost from '../assets/blogPost1.png';
+import blogPost1 from '../assets/blogPost1.png';
 import blogPost2 from '../assets/blogPodt2.jpg';
 import blogPost3 from '../assets/blogPost3.jpg';
+import userTeam1 from '../assets/userTeam1.jpg'
+import userTeam2 from '../assets/userTeam2.jpg'
+import userTeam3 from '../assets/userTeam3.jpg'
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 
 const Blog = () => {
+
+  const [blogs, setBlogs] = useState([
+    {
+      blogPostImage: blogPost1,
+      category: 'TECHNOLOGY',
+      headLine:'The Future of Social Connection in 2026',
+      description: 'Exploring how decentralized networks and minimalist design are shaping the next generation of social media',
+      userTeam: {
+        profileImage: userTeam1,
+        name:'Alex Rivera'
+      },
+      date:'May 10, 2026'
+    },
+    {
+      blogPostImage: blogPost2,
+      category: 'PRIVACY',
+      headLine:'Why We Choose Zero Tracking Policy',
+      description: 'Data privacy is not a feature, it is a fundamental right. Learn how Lumina protects your digital footprint.',
+      userTeam: {
+        profileImage: userTeam2,
+        name:'Sarah Chen'
+      },
+      date:'May 08, 2026'
+    },
+    {
+      blogPostImage: blogPost3,
+      category: 'DESIGN',
+      headLine:'The Psychology of Minimalist UI',
+      description: 'How a clean interface reduces digital fatigue and helps users focus on meaningful interactions.',
+      userTeam: {
+        profileImage: userTeam3,
+        name:'David Miller'
+      },
+      date:'May 05, 2026'
+    },
+  ])
+
   return (
     <div>
       <Navbar />
@@ -131,10 +171,50 @@ const Blog = () => {
         </div>
       </section>
 
+      {/* ==================== main blog post (data from backend) ==============  */}
+      <section className='block w-full max-w-300 m-auto'>
+        <h3 className="text-3xl font-bold text-center mb-5">Latest Articles</h3>
 
+        <div className="grid gap-5 p-2 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7">
+          {blogs.map((blog, index) => (
+            <div
+              key={index}
+              className="flex flex-col gap-3 shadow-2xl p-4 lg:p-0 lg:shadow-none rounded-2xl"
+            >
+              <img
+                className="w-full h-50 object-cover rounded-xl"
+                src={blog.blogPostImage}
+                alt="Blog post image"
+              />
+              <span className="text-[10px] font-black tracking-widest text-blue-500 block">
+                {blog.category}
+              </span>
+              <h3 className="text-xl font-semibold text-gray-700 lg:px-4">
+                {blog.headLine}
+              </h3>
+              <p className="text-sm text-gray-400 lg:px-4">
+                {blog.description}
+              </p>
+              <div className="flex items-center justify-between lg:px-2">
+                <div className="flex gap-2 items-center">
+                  <img
+                    className="w-10 h-10 rounded-full object-cover"
+                    src={blog.userTeam.profileImage}
+                  />
+                  <p className="text-sm text-gray-700">{blog.userTeam.name}</p>
+                </div>
+                <p className="text-gray-400 text-xs">{blog.date}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+      <button className=" block w-40 h-12 bg-blue-400 mt-10 mb-20 text-white rounded-full m-auto hover:-translate-y-2 duration-300 hover:shadow-[0px_10px_10px_#00000020] cursor-pointer">
+        Show More
+      </button>
 
       {/* =================== Footer section ============  */}
-      <Footer/>
+      <Footer />
     </div>
   );
 };
