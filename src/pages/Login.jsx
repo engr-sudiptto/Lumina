@@ -29,17 +29,18 @@ const Login = () => {
             User Name or Email
           </label>
           <input
-            className="w-full h-12 border px-2 text-sm rounded-lg border-blue-400 text-blue-600 outline-0"
+            className="w-full h-12 border px-4 text-sm rounded-lg border-blue-400 text-blue-600 outline-0"
             type="text"
             placeholder="Enter user name or email"
           />
 
           <label className="text-sm block my-3 text-gray-500">Password</label>
           <input
-            className="w-full h-12 border px-2 text-sm rounded-lg border-blue-400 text-blue-600 outline-0"
+            className="w-full h-12 border px-4 text-sm rounded-lg border-blue-400 text-blue-600 outline-0"
             type="password"
             placeholder="Enter password"
           />
+          <Link to='/reset-password' className='text-sm text-blue-400 block text-right mt-2 hover:underline'>Forgot password?</Link>
           <button
             className="w-full h-12 bg-blue-300 block my-3 rounded-lg mt-6 cursor-pointer"
             type="submit"
