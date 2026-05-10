@@ -6,6 +6,8 @@ import Blog from './pages/Blog';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import ResetPassword from './pages/ResetPassword';
+import Profile from './afterLoginPages/Profile';
+import VerifyEmail from './afterLoginPages/VerifyEmail';
 
 
 
@@ -20,6 +22,8 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/reset-password" element={<ResetPassword/>} />
+          <Route path="/profile" element={<Profile/>} />
+          <Route path="/verify-email" element={<VerifyEmail/>} />
         </Routes>
       </Router>
     </div>
