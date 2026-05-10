@@ -39,7 +39,28 @@ const ResetPassword = () => {
         e.target.previousSibling.focus();
       }
     }
-  }
+  } 
+
+  // ------------- copy paste function ----------- 
+  const handlePaste = (e) => {
+    e.preventDefault();
+    const pasteData = e.clipboardData.getData('text').slice(0, 6);
+
+    // only number can paste
+    if (!isNaN(pasteData)) {
+      const newOtp = pasteData.split('');
+
+      // if number is less than 6, another box will be empty
+      const paddedOtp = [...newOtp, ...new Array(6 - newOtp.length).fill('')].slice(0, 6);
+
+      setInputOtp(paddedOtp);
+
+      // move focus to the last box
+      const lastBoxIndex = Math.min(newOtp.length, 5);
+      const inputs = e.target.parentElement.querySelectorAll('input')
+      inputs[lastBoxIndex].focus()
+    }
+  };
 
 
   return (
@@ -106,6 +127,7 @@ const ResetPassword = () => {
               <input
                 onChange={e => handelChange(e, index)}
                 onKeyDown={e => handelKeyDown(e, index)}
+                onPaste={handlePaste}
                 key={index}
                 value={data}
                 maxLength="1"
@@ -114,7 +136,7 @@ const ResetPassword = () => {
                 required
               ></input>
             ))}
-          </div> 
+          </div>
 
           <button
             className="block cursor-pointer w-full h-12 bg-blue-400/50 rounded-lg text-sm font-bold text-gray-700 hover:-translate-y-1 duration-300 hover:shadow-2xl mt-10 mb-5"
@@ -130,6 +152,7 @@ const ResetPassword = () => {
           </p>
         </form>
       )}
+
     </div>
   );
 };
