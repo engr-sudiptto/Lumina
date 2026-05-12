@@ -6,7 +6,7 @@ const AfterLoginNav = () => {
   return (
     <div className="block bg-white w-full max-w-300 fixed top-0 left-1/2 -translate-x-1/2">
       <div className="flex justify-between px-3 pt-2 h-12 items-center sm:px-5">
-        <Link>
+        <Link to="/feed">
           <img className="w-30" src={luminaLogo} alt="Lumina" />
         </Link>
         <nav>
@@ -27,7 +27,7 @@ const AfterLoginNav = () => {
                 />
               </svg>
             </Link>
-            <Link>
+            <Link to="/messages">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -43,12 +43,28 @@ const AfterLoginNav = () => {
                 />
               </svg>
             </Link>
+            <Link>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="size-7 text-gray-500"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9"
+                />
+              </svg>
+            </Link>
           </ul>
         </nav>
       </div>
 
       <div className="flex w-full justify-between px-3 h-10 sm:h-13 items-center py-6 sm:px-10 sm:py-8 lg:w-[80%] xl:w-[70%] lg:m-auto">
-        <Link>
+        <Link to="/feed">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -65,7 +81,7 @@ const AfterLoginNav = () => {
           </svg>
         </Link>
 
-        <Link>
+        <Link to="/verify-email">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -82,7 +98,7 @@ const AfterLoginNav = () => {
           </svg>
         </Link>
 
-        <Link>
+        <Link to="/requests">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -99,7 +115,7 @@ const AfterLoginNav = () => {
           </svg>
         </Link>
 
-        <Link>
+        <Link to="/create-post">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -114,7 +130,7 @@ const AfterLoginNav = () => {
           </svg>
         </Link>
 
-        <Link>
+        <Link to="/notifications">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -131,7 +147,7 @@ const AfterLoginNav = () => {
           </svg>
         </Link>
 
-        <Link>
+        <Link to="/profile">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
