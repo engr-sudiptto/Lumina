@@ -1,8 +1,106 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import AfterLoginNav from '../components/AfterLoginNav'
 
 const CreatePost = () => {
   const fileInputRef = useRef(null)
+  const [headLine, setHadeLine] = useState('');
+  const [content, setContent] = useState('');
+  const [images, setImages] = useState([]);
+  const [isDragging, setIsDragging] = useState(false);
+
+
+  const handleFileProcessing = (files) => {
+    const selectedFiles = Array.from(files);
+    const newImages = selectedFiles.map(file => ({
+      file,
+      preview: URL.createObjectURL(file)
+    }));
+    setImages(prev => [...prev, ...newImages])
+  }
+
+  const onFileSelect = (e) => {
+    if (e.target.files && e.target.files.length > 0) {
+      handleFileProcessing(e.target.files)
+    }
+  }
+
+  // ================ handle form submit ==================
+  const formSubmitHandler = (e) => {
+    e.preventDefault();
+    alert('Post create successfully!') // backend code here
+  }
+
+  // =========== Image layout render function ==============
+  const renderImagePreview = () => {
+    const count = images.length;
+    if (count === 0) return null;
+
+    return (
+      <div className="w-full h-60 sm:h-90 lg:h-100 mt-5 mb-5 border rounded-lg border-gray-300 relative overflow-hidden">
+        <button
+          onClick={()=>setImages([])}
+          title="Clear all images"
+          className="w-5 h-5 flex items-center justify-center bg-black/50 text-white absolute top-2 right-2 rounded-full cursor-pointer"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="currentColor"
+            className="size-4 rotate-45"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M12 4.5v15m7.5-7.5h-15"
+            />
+          </svg>
+        </button>
+
+        {/* ----------- 1 image ---------- */}
+        {count === 1 && (
+          <div className='w-full h-full'>
+            <img className='w-full h-full object-cover' src={images[0].preview} alt="image 1" />
+          </div>
+        )}
+        {/* ----------- 2 images ---------- */}
+        {count === 2 && (
+          <div className='w-full h-full grid grid-cols-2 gap-2 bg-white'>
+            <img className='w-full h-full object-cover' src={images[0].preview} alt="image 1" />
+            <img className='w-full h-full object-cover' src={images[1].preview} alt="image 2" />
+          </div>
+        )}
+        {/* ----------- 3 images ---------- */}
+        {count === 3 && (
+          <div className='w-full h-full grid grid-cols-2 gap-2 grid-rows-2 bg-white'>
+            <img className='w-full h-full object-cover row-span-2' src={images[0].preview} alt="image 1" />
+            <img className='w-full h-full object-cover' src={images[1].preview} alt="image 2" />
+            <img className='w-full h-full object-cover' src={images[2].preview} alt="image 3" />
+          </div>
+        )}
+        {/* ----------- 4 or 4+ images ---------- */}
+        {count >= 4 && (
+          <div className='w-full h-full grid grid-cols-2 gap-2 grid-rows-2 bg-white'>
+            <img className='w-full h-full object-cover' src={images[0].preview} alt="image 1" />
+            <img className='w-full h-full object-cover' src={images[1].preview} alt="image 2" />
+            <img className='w-full h-full object-cover' src={images[2].preview} alt="image 3" />
+            
+            <div className='relative w-full h-full group'>
+              <img className='w-full h-full object-cover' src={images[3].preview} alt="image 4" />
+              {count > 4 && (
+                <div className='absolute inset-0 flex bg-black/40 justify-center items-center cursor-pointer'>
+                  <span className='font-semibold text-2xl text-white'>+{count - 4}</span>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+      </div>
+    );
+  }
+
   return (
     <div className="w-full max-w-300 m-auto pt-23 sm:pt-28 ">
       <AfterLoginNav />
@@ -11,7 +109,7 @@ const CreatePost = () => {
         <h2 className="text-2xl text-center my-5 font-semibold text-gray-500">
           Create a new post
         </h2>
-        <form>
+        <form onSubmit={formSubmitHandler}>
           {/* ------------- title input ------------  */}
           <label
             htmlFor="title"
@@ -21,6 +119,8 @@ const CreatePost = () => {
           </label>
           <input
             type="text"
+            value={headLine}
+            onChange={e => setHadeLine(e.target.value)}
             placeholder="What is this post about?"
             required
             className="my-3 w-full h-12 px-2 text-sm border border-gray-300 rounded-lg outline-0"
@@ -35,6 +135,8 @@ const CreatePost = () => {
               Post Content
             </label>
             <textarea
+              value={content}
+              onChange={e => setContent(e.target.value)}
               required
               placeholder="Write your thoughts here..."
               className="my-3 w-full h-30 px-3 pt-2 text-xs border border-gray-300 rounded-lg resize-none outline-0 lg:text-sm"
@@ -49,7 +151,7 @@ const CreatePost = () => {
             {/* ---- image upload box ----  */}
             <div
               onClick={() => fileInputRef.current?.click()}
-              className={`w-full h-40 border border-gray-300 rounded-lg flex flex-col items-center justify-center gap-3 mt-3 sm:h-50`}
+              className={`w-full h-40 border border-gray-300 rounded-lg flex flex-col items-center justify-center gap-3 mt-3 sm:h-50 cursor-pointer`}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -75,12 +177,17 @@ const CreatePost = () => {
                 accept="image/*"
                 multiple
                 ref={fileInputRef}
+                onChange={onFileSelect}
                 className=" hidden"
               />
             </div>
           </div>
 
           {/* ------------- Dynamic image grid preview -------------  */}
+
+          {renderImagePreview()}
+
+          {/* -------------- post button ------------- */}
           <button
             type="submit"
             className="w-full h-12 bg-[#22709370] mt-5 rounded-lg text-sm font-semibold tracking-wide text-gray-700 cursor-pointer"
