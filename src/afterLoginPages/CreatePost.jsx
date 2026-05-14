@@ -24,6 +24,23 @@ const CreatePost = () => {
     }
   }
 
+  // ============= drag and drop image ============
+  const onDragOver = (e) => {
+    e.preventDefault();
+    setIsDragging(true);
+  }
+  const onDragLeave = (e) => {
+    e.preventDefault();
+    setIsDragging(false)
+  }
+  const onDrop = (e) => {
+    e.preventDefault();
+    setIsDragging(false);
+    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+      handleFileProcessing(e.dataTransfer.files)
+    }
+  }
+
   // ================ handle form submit ==================
   const formSubmitHandler = (e) => {
     e.preventDefault();
@@ -150,6 +167,9 @@ const CreatePost = () => {
             </label>
             {/* ---- image upload box ----  */}
             <div
+              onDragOver={onDragOver}
+              onDragLeave={onDragLeave}
+              onDrop={onDrop}
               onClick={() => fileInputRef.current?.click()}
               className={`w-full h-40 border border-gray-300 rounded-lg flex flex-col items-center justify-center gap-3 mt-3 sm:h-50 cursor-pointer`}
             >
