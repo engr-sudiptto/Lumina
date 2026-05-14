@@ -171,7 +171,7 @@ const CreatePost = () => {
               onDragLeave={onDragLeave}
               onDrop={onDrop}
               onClick={() => fileInputRef.current?.click()}
-              className={`w-full h-40 border border-gray-300 rounded-lg flex flex-col items-center justify-center gap-3 mt-3 sm:h-50 cursor-pointer`}
+              className={`w-full h-40 border border-gray-300 rounded-lg flex flex-col items-center justify-center gap-3 mt-3 sm:h-50 cursor-pointer ${isDragging ? 'border-indigo-300 bg-indigo-300/20' : 'border-gray-300 bg-transparent'}`}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
