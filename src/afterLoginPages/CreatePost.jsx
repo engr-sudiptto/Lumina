@@ -33,7 +33,17 @@ const CreatePost = () => {
 
     const handleDragLeave = (e) => {
       e.preventDefault();
-      if (e.clientX === 0 && e.clientY === 0) {
+
+      // boundary of the entire window
+      const rect = document.documentElement.getBoundingClientRect();
+
+      // identifying Current mouse position
+      if (
+        e.clientX <= rect.left ||
+        e.clientX >= rect.right ||
+        e.clientY <= rect.top ||
+        e.clientY >= rect.bottom
+      ) {
         setIsDragging(false);
       }
     }
@@ -50,6 +60,7 @@ const CreatePost = () => {
     window.addEventListener('dragleave', handleDragLeave)
     window.addEventListener('drop', handleDrop)
 
+    // clean up event listener to prevent memory leaks
     return ()=>{
       window.removeEventListener('dragover', handleDragOver);
       window.removeEventListener('dragleave', handleDragLeave);
