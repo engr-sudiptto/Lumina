@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import AfterLoginNav from '../components/AfterLoginNav'
 
 const CreatePost = () => {
@@ -24,22 +24,40 @@ const CreatePost = () => {
     }
   }
 
-  // ============= drag and drop image ============
-  const onDragOver = (e) => {
-    e.preventDefault();
-    setIsDragging(true);
-  }
-  const onDragLeave = (e) => {
-    e.preventDefault();
-    setIsDragging(false)
-  }
-  const onDrop = (e) => {
-    e.preventDefault();
-    setIsDragging(false);
-    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-      handleFileProcessing(e.dataTransfer.files)
+  // ============= full screen drag and drop functionality ============
+  useEffect(() => {
+    const handleDragOver = (e) => {
+      e.preventDefault();
+      setIsDragging(true);
+    };
+
+    const handleDragLeave = (e) => {
+      e.preventDefault();
+      if (e.clientX === 0 && e.clientY === 0) {
+        setIsDragging(false);
+      }
     }
-  }
+
+    const handleDrop = (e) => {
+      e.preventDefault();
+      setIsDragging(false);
+      if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+        handleFileProcessing(e.dataTransfer.files)
+      }
+    }
+
+    window.addEventListener('dragover', handleDragOver)
+    window.addEventListener('dragleave', handleDragLeave)
+    window.addEventListener('drop', handleDrop)
+
+    return ()=>{
+      window.removeEventListener('dragover', handleDragOver);
+      window.removeEventListener('dragleave', handleDragLeave);
+      window.removeEventListener('drop', handleDrop);
+    }
+
+  }, [])
+
 
   // ================ handle form submit ==================
   const formSubmitHandler = (e) => {
@@ -167,9 +185,6 @@ const CreatePost = () => {
             </label>
             {/* ---- image upload box ----  */}
             <div
-              onDragOver={onDragOver}
-              onDragLeave={onDragLeave}
-              onDrop={onDrop}
               onClick={() => fileInputRef.current?.click()}
               className={`w-full h-40 border border-gray-300 rounded-lg flex flex-col items-center justify-center gap-3 mt-3 sm:h-50 cursor-pointer ${isDragging ? 'border-indigo-300 bg-indigo-300/20' : 'border-gray-300 bg-transparent'}`}
             >
