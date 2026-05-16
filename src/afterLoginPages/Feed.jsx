@@ -1,5 +1,16 @@
 import React from 'react'
 import AfterLoginNav from '../components/AfterLoginNav'
+import user1 from '../assets/userTeam1.jpg'
+import user2 from '../assets/userTeam2.jpg'
+import user3 from '../assets/userTeam3.jpg'
+import imageA1 from '../assets/a1.jpg'
+import imageA2 from '../assets/a2.jpg'
+import imageA3 from '../assets/a3.jpg'
+import imageA4 from '../assets/a4.jpg'
+import imageA5 from '../assets/a5.jpg'
+import imageA6 from '../assets/a6.jpg'
+import imageA7 from '../assets/a7.jpg'
+import imageA8 from '../assets/a8.jpg'
 
 const Feed = () => {
   return (
