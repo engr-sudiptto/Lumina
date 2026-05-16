@@ -3,16 +3,104 @@ import AfterLoginNav from '../components/AfterLoginNav';
 import { postsData } from '../data/postData';
 
 const Feed = () => {
+  // =========== Image layout render function ==============
+  const renderImagePreview = (images) => {
+    const count = images.length;
+    if (count === 0) return null;
+
+    return (
+      <div className="w-full h-60 sm:h-90 lg:h-100 mt-5 mb-5 border rounded-lg border-gray-300 relative overflow-hidden">
+        {/* ----------- 1 image ---------- */}
+        {count === 1 && (
+          <div className="w-full h-full">
+            <img
+              className="w-full h-full object-cover"
+              src={images[0]}
+              alt="image 1"
+            />
+          </div>
+        )}
+        {/* ----------- 2 images ---------- */}
+        {count === 2 && (
+          <div className="w-full h-full grid grid-cols-2 gap-2 bg-white">
+            <img
+              className="w-full h-full object-cover"
+              src={images[0]}
+              alt="image 1"
+            />
+            <img
+              className="w-full h-full object-cover"
+              src={images[1]}
+              alt="image 2"
+            />
+          </div>
+        )}
+        {/* ----------- 3 images ---------- */}
+        {count === 3 && (
+          <div className="w-full h-full grid grid-cols-2 gap-2 grid-rows-2 bg-white">
+            <img
+              className="w-full h-full object-cover row-span-2"
+              src={images[0]}
+              alt="image 1"
+            />
+            <img
+              className="w-full h-full object-cover"
+              src={images[1]}
+              alt="image 2"
+            />
+            <img
+              className="w-full h-full object-cover"
+              src={images[2]}
+              alt="image 3"
+            />
+          </div>
+        )}
+        {/* ----------- 4 or 4+ images ---------- */}
+        {count >= 4 && (
+          <div className="w-full h-full grid grid-cols-2 gap-2 grid-rows-2 bg-white">
+            <img
+              className="w-full h-full object-cover"
+              src={images[0]}
+              alt="image 1"
+            />
+            <img
+              className="w-full h-full object-cover"
+              src={images[1]}
+              alt="image 2"
+            />
+            <img
+              className="w-full h-full object-cover"
+              src={images[2]}
+              alt="image 3"
+            />
+
+            <div className="relative w-full h-full group">
+              <img
+                className="w-full h-full object-cover"
+                src={images[3]}
+                alt="image 4"
+              />
+              {count > 4 && (
+                <div className="absolute inset-0 flex bg-black/40 justify-center items-center cursor-pointer">
+                  <span className="font-semibold text-2xl text-white">
+                    +{count - 4}
+                  </span>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  };
+
   return (
     <div className="w-full max-w-300 m-auto pt-23 sm:pt-28 ">
       <AfterLoginNav />
       {/* ============ post section ============== */}
       <div className="grid gap-5 bg-gray-50 w-full max-w-150 m-auto">
         {postsData.map(singlePost => (
-          <div
-            key={singlePost.id}
-            className=" py-4 px-2"
-          >
+          <div key={singlePost.id} className=" py-4 px-2">
             {/* -------- user info ------  */}
             <div className="flex gap-3 items-center mb-3">
               <img
@@ -39,11 +127,7 @@ const Feed = () => {
             </div>
 
             {/* -------- post images ---------  */}
-            <div className="my-3">
-              {singlePost.post.images.map((img, index) => (
-                <img key={index} src={img} />
-              ))}
-            </div>
+            {renderImagePreview(singlePost.post.images)}
 
             {/* ----------- love and comment --------- */}
             <div className="flex gap-5">
@@ -121,6 +205,6 @@ const Feed = () => {
       </div>
     </div>
   );
-};
+};;
 
 export default Feed;
