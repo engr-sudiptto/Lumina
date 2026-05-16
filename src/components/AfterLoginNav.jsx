@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 const AfterLoginNav = () => {
   return (
-    <div className="block bg-white w-full max-w-300 fixed top-0 left-1/2 -translate-x-1/2">
+    <div className="block bg-white w-full max-w-300 fixed top-0 left-1/2 -translate-x-1/2 z-9999">
       <div className="flex justify-between px-3 pt-2 h-12 items-center sm:px-5">
         <Link to="/feed">
           <img className="w-30" src={luminaLogo} alt="Lumina" />
