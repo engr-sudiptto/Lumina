@@ -39,6 +39,12 @@ export const postsData = [
           name: 'David Miller',
           text: 'Berlin is on top of my travel bucket list this year.',
         },
+        {
+          id: 103,
+          profileImage: user3,
+          name: 'David Miller',
+          text: 'Berlin is on top of my travel bucket list this year.',
+        },
       ],
     },
   },

@@ -24,9 +24,11 @@ const FeedShowCommets = ({ comments , isOpen}) => {
               </div>
             </div>
           ))}
-          <button className="text-sm text-gray-500 cursor-pointer mb-3 mt-2 text-left pl-2">
-            More...
-          </button>
+          {comments.length > 2 && (
+            <button className="text-sm text-gray-500 cursor-pointer mb-3 mt-2 text-left pl-2">
+              More...
+            </button>
+          )}
         </div>
       )}
     </div>
