@@ -1,10 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AfterLoginNav from '../components/AfterLoginNav';
 import { postsData } from '../data/postData';
+import FeedShowCommets from '../components/FeedShowCommets';
 
 const Feed = () => {
+  // =========== show comment function ==============
+  const [isCommentClicked, setIsCommentClicked] = useState({});
+  const commentsToggleFunction = postId => {
+    setIsCommentClicked(prev => {
+      return { ...prev, [postId]: !prev[postId] };
+    });
+  };
+
   // =========== Image layout render function ==============
-  const renderImagePreview = (images) => {
+  const renderImagePreview = images => {
     const count = images.length;
     if (count === 0) return null;
 
@@ -139,7 +148,7 @@ const Feed = () => {
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
                   stroke="currentColor"
-                  class="size-6 text-red-500/50 cursor-pointer"
+                  className="size-6 text-red-500/50 cursor-pointer"
                 >
                   <path
                     strokeLinecap="round"
@@ -152,14 +161,17 @@ const Feed = () => {
                 </p>
               </div>
               {/* ------- comment counter -------  */}
-              <div className="flex gap-1 items-center">
+              <div
+                onClick={() => commentsToggleFunction(singlePost.id)}
+                className="flex gap-1 items-center cursor-pointer"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
                   stroke="currentColor"
-                  class="size-6 text-gray-500"
+                  className="size-6 text-gray-500"
                 >
                   <path
                     strokeLinecap="round"
@@ -172,6 +184,12 @@ const Feed = () => {
                 </p>
               </div>
             </div>
+
+            {/* -------------- All comments ----------- */}
+            <FeedShowCommets
+              comments={singlePost.post.comments}
+              isOpen={!!isCommentClicked[singlePost.id]}
+            />
 
             {/* --------------- comment box --------------  */}
             <form className="mt-2">
@@ -189,7 +207,7 @@ const Feed = () => {
                     viewBox="0 0 24 24"
                     strokeWidth="1.5"
                     stroke="currentColor"
-                    class="size-6 text-gray-500"
+                    className="size-6 text-gray-500"
                   >
                     <path
                       strokeLinecap="round"
@@ -205,6 +223,6 @@ const Feed = () => {
       </div>
     </div>
   );
-};;
+};
 
 export default Feed;
