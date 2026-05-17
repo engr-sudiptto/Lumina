@@ -5,7 +5,7 @@ const FeedShowCommets = ({ comments , isOpen}) => {
     <div>
       {isOpen && (
         <div className="grid gap-2 mt-5">
-          {comments.map((comment, index) => (
+          {comments.slice(0, 2).map((comment, index) => (
             <div
               key={index}
               className="bg-slate-200 w-[90%] p-2 py-3 rounded-lg"
